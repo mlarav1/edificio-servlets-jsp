@@ -1,0 +1,9 @@
+target/
+.env
+.claude/
+CLAUDE.md
+*.log
+.idea/
+*.iml
+.vscode/
+node_modules/
