@@ -21,7 +21,7 @@ Duración aproximada: 10 a 12 minutos. Para leer en cámara.
 "Hay cuatro reportes. Para edificios: por ciudad y rango de pisos, y por rango de valor de administración con filtros de ascensor y zona social. Para usuarios: por rol y por texto en el nombre o el dominio del correo. Todos usan consultas parametrizadas."
 
 ## 7. Recuperación de clave (8:30 - 9:30)
-"En 'Olvidaste tu clave' escribo mi correo. El sistema genera una clave temporal, la envía por correo con Jakarta Mail y guarda solo su hash BCrypt. Responde igual aunque el correo no exista, para no revelar usuarios."
+"En 'Olvidaste tu clave' escribo mi correo. El sistema genera un token aleatorio, guarda solo su hash y envía por correo un enlace que vence en 30 minutos y se usa una sola vez; con ese enlace creo una clave nueva, que se guarda con BCrypt. Responde igual aunque el correo no exista, para no revelar usuarios."
 
 ## 8. Aplicación desplegada (9:30 - 10:15)
 "Esta es la aplicación publicada en Internet: [URL de la aplicación desplegada]. Ingreso, hago una consulta y compruebo que funciona igual que en local."

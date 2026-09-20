@@ -29,7 +29,7 @@ psql -U postgres -d edificios -f db/data.sql
 
 ## Variables de entorno (ver `.env.example`)
 
-`DB_URL`, `DB_USER`, `DB_PASSWORD` (o `DATABASE_URL`), `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, `SMTP_STARTTLS`, `SMTP_SSL`.
+`DB_URL`, `DB_USER`, `DB_PASSWORD` (o `DATABASE_URL`), `BREVO_API_KEY`, `MAIL_FROM`, `MAIL_FROM_NAME`, `APP_BASE_URL` (en Render se toma de `RENDER_EXTERNAL_URL`), `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_STARTTLS`.
 
 ## Ejecución local
 
@@ -54,7 +54,7 @@ mvn cargo:run        # http://localhost:8080
 ## Decisiones técnicas
 
 - **Claves con BCrypt:** nunca se guardan en texto plano; si la base se filtra no se pueden leer las claves.
-- **Recuperación:** se genera una clave temporal aleatoria, se envía por Jakarta Mail y solo entonces se guarda su hash. La respuesta es igual exista o no el correo, para no revelar usuarios.
+- **Recuperación por token:** se genera un token aleatorio de 256 bits; en la base (tabla `token_recuperacion`, aparte para que `Usuario` conserve sus 4 atributos) solo se guarda su hash SHA-256 con vencimiento de 30 minutos. El correo lleva el enlace `AuthController.jsp?action=restablecer&token=...`; el token sirve una sola vez y la nueva clave se guarda con BCrypt. La respuesta es igual exista o no el correo. Envío: API HTTPS de Brevo (`BREVO_API_KEY`, `MAIL_FROM`; el plan gratuito de Render bloquea SMTP), o SMTP (`SMTP_HOST`), o el enlace en el log si no hay ninguno.
 - **Sesión:** `HttpSession`; `AuthFilter` protege todas las páginas, redirige al login sin sesión y restringe la gestión de usuarios al rol ADMIN.
 - **SQL:** solo `PreparedStatement`, con `try-with-resources`.
 - **PRG:** tras crear, editar o eliminar se redirige (Post/Redirect/Get).

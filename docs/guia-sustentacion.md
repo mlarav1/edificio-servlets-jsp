@@ -50,7 +50,7 @@ Todas las consultas usan `PreparedStatement` con `?`; nunca se concatenan valore
 
 ## 7. ¿Cómo se guardan las claves y cómo funciona la recuperación?
 
-Con BCrypt (`BCrypt.hashpw`), nunca en texto plano. En la recuperación `AuthService.recuperarClave` genera una clave temporal con `SecureRandom`, la envía con Jakarta Mail (`CorreoService`) y solo después guarda su hash. La respuesta es igual exista o no el correo, para no revelar qué usuarios existen.
+Con BCrypt (`BCrypt.hashpw`), nunca en texto plano. En la recuperación `AuthService.solicitarRecuperacion` genera un token de 256 bits con `SecureRandom`, guarda solo su hash SHA-256 con vencimiento de 30 minutos (`TokenDAO`, tabla `token_recuperacion`) y `CorreoService` envía por correo (API de Brevo o SMTP) el enlace de restablecimiento. `AuthService.restablecer` valida el token, guarda la nueva clave con BCrypt y borra el token: solo sirve una vez. La respuesta es igual exista o no el correo, para no revelar qué usuarios existen.
 
 ## 8. ¿Por qué el `id` del Usuario es el correo?
 

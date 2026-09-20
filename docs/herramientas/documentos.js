@@ -96,7 +96,7 @@ const hijos = [
   ...figura('capturas/11-reporte-usuario-texto.png', 'Reporte de usuarios por texto.', 580, 400),
 
   h1('7. Recuperación de clave'),
-  p('El usuario escribe su correo; AuthService genera una clave temporal aleatoria (SecureRandom), la envía por SMTP con Jakarta Mail y guarda su hash BCrypt. La respuesta es la misma exista o no el correo.'),
+  p('El usuario escribe su correo; AuthService genera un token aleatorio de 256 bits (SecureRandom), guarda solo su hash SHA-256 (tabla token_recuperacion, vigencia de 30 minutos) y CorreoService envía por correo el enlace de restablecimiento (API de Brevo o SMTP). El token sirve una sola vez; la nueva clave se guarda con BCrypt. La respuesta es la misma exista o no el correo.'),
   ...figura('capturas-codigo/08-recuperacion-clave.png', 'Recuperación de clave en AuthService.', 560, 560),
   ...figura('capturas/02-recuperar-clave.png', 'Formulario de recuperación de clave.', 460, 360),
   ...figura('capturas/13-recuperar-clave-enviada.png', 'Confirmación tras solicitar la recuperación.', 460, 360),
