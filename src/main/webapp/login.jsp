@@ -16,7 +16,8 @@
     <h1>&#127970; Edificios</h1>
     <c:if test="${param.msg == 'sesion'}"><div class="alerta error">Debes iniciar sesión para continuar.</div></c:if>
     <c:if test="${param.msg == 'salio'}"><div class="alerta ok">Cerraste sesión correctamente.</div></c:if>
-    <c:if test="${param.msg == 'recuperada'}"><div class="alerta ok">Si el correo existe, te enviamos una clave temporal.</div></c:if>
+    <c:if test="${param.msg == 'recuperada'}"><div class="alerta ok">Si el correo existe, te enviamos un enlace para restablecer tu clave.</div></c:if>
+    <c:if test="${param.msg == 'clave'}"><div class="alerta ok">Tu clave fue actualizada. Ya puedes iniciar sesión.</div></c:if>
     <c:if test="${not empty sessionScope.loginError}">
       <div class="alerta error">${fn:escapeXml(sessionScope.loginError)}</div>
       <c:remove var="loginError" scope="session"/>

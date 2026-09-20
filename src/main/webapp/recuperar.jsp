@@ -18,12 +18,12 @@
       <div class="alerta error">${fn:escapeXml(sessionScope.loginError)}</div>
       <c:remove var="loginError" scope="session"/>
     </c:if>
-    <p>Escribe tu correo y te enviaremos una clave temporal.</p>
+    <p>Escribe tu correo y te enviaremos un enlace para crear una clave nueva.</p>
     <form method="post" action="${ctx}/AuthController.jsp">
       <input type="hidden" name="action" value="recuperar">
       <div class="campo"><label for="correo">Correo</label>
         <input type="email" id="correo" name="correo" required autofocus></div>
-      <button class="btn" type="submit">Enviar clave temporal</button>
+      <button class="btn" type="submit">Enviar enlace</button>
     </form>
     <p class="enlace-centro"><a href="${ctx}/login.jsp">Volver al inicio de sesión</a></p>
   </div>

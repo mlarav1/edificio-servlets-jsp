@@ -3,6 +3,15 @@
 <%!
     // Controlador de autenticacion: recibe "action" y despacha con un switch.
     private final AuthService auth = new AuthService();
+
+    /** Direccion publica para armar el enlace del correo: APP_BASE_URL, RENDER_EXTERNAL_URL o la de la peticion. */
+    private String baseUrl(HttpServletRequest r) {
+        String v = System.getenv("APP_BASE_URL");
+        if (v == null || v.isBlank()) v = System.getenv("RENDER_EXTERNAL_URL");
+        if (v != null && !v.isBlank()) return v;
+        String puerto = (r.getServerPort() == 80 || r.getServerPort() == 443) ? "" : ":" + r.getServerPort();
+        return r.getScheme() + "://" + r.getServerName() + puerto + r.getContextPath();
+    }
 %>
 <%
     request.setCharacterEncoding("UTF-8");
@@ -37,9 +46,34 @@
         case "recuperar": {
             if (!"POST".equals(request.getMethod())) { response.sendRedirect(ctx + "/recuperar.jsp"); return; }
             try {
-                auth.recuperarClave(request.getParameter("correo"));
+                // Envia por correo un enlace con token (vigente 30 min, un solo uso).
+                auth.solicitarRecuperacion(request.getParameter("correo"), baseUrl(request));
                 // Respuesta identica exista o no el correo.
                 response.sendRedirect(ctx + "/login.jsp?msg=recuperada");
+            } catch (NegocioException e) {
+                session.setAttribute("loginError", e.getMessage());
+                response.sendRedirect(ctx + "/recuperar.jsp");
+            }
+            return;
+        }
+        case "restablecer": {
+            String token = request.getParameter("token");
+            if ("POST".equals(request.getMethod())) {
+                try {
+                    auth.restablecer(token, request.getParameter("nuevaClave"), request.getParameter("confirmarClave"));
+                    response.sendRedirect(ctx + "/login.jsp?msg=clave");
+                } catch (NegocioException e) {
+                    session.setAttribute("loginError", e.getMessage());
+                    response.sendRedirect(ctx + "/AuthController.jsp?action=restablecer&token="
+                            + java.net.URLEncoder.encode(token == null ? "" : token, "UTF-8"));
+                }
+                return;
+            }
+            // GET: solo se muestra el formulario si el token del enlace es valido.
+            try {
+                request.setAttribute("nombre", auth.validarToken(token).getNombre());
+                request.setAttribute("token", token);
+                request.getRequestDispatcher("/WEB-INF/views/auth/restablecer.jsp").forward(request, response);
             } catch (NegocioException e) {
                 session.setAttribute("loginError", e.getMessage());
                 response.sendRedirect(ctx + "/recuperar.jsp");
