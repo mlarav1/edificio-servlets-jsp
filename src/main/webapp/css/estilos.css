@@ -1,0 +1,68 @@
+:root {
+  --azul: #1f4e79; --azul-osc: #163a5a; --acento: #e8a33d;
+  --fondo: #f3f5f8; --texto: #24303c; --borde: #d5dbe3; --ok: #2e7d4f; --err: #b3372f;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Segoe UI", system-ui, Arial, sans-serif; background: var(--fondo); color: var(--texto); }
+a { color: var(--azul); }
+
+.barra { background: var(--azul); color: #fff; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.5rem; padding: .7rem 1.2rem; }
+.barra .marca { font-weight: 700; font-size: 1.15rem; letter-spacing: .3px; }
+.barra nav { display: flex; flex-wrap: wrap; gap: .3rem; flex: 1; }
+.barra nav a { color: #fff; text-decoration: none; padding: .4rem .8rem; border-radius: 6px; }
+.barra nav a:hover, .barra nav a.activo { background: var(--azul-osc); }
+.barra .sesion { font-size: .9rem; display: flex; gap: .8rem; align-items: center; }
+.barra .sesion a { color: var(--acento); }
+
+main { max-width: 1150px; margin: 1.5rem auto; padding: 0 1rem; }
+h1 { margin: 0 0 1rem; font-size: 1.6rem; color: var(--azul-osc); }
+.tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 10px; padding: 1.2rem; margin-bottom: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+
+.alerta { padding: .75rem 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid; }
+.alerta.ok { background: #e7f4ec; border-color: #b7dcc4; color: var(--ok); }
+.alerta.error { background: #fbeae8; border-color: #efc1bc; color: var(--err); }
+
+.tabla-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .93rem; }
+th, td { padding: .6rem .7rem; text-align: left; border-bottom: 1px solid var(--borde); white-space: nowrap; }
+th { background: #eaf0f6; color: var(--azul-osc); }
+tr:hover td { background: #f8fafc; }
+td.num, th.num { text-align: right; }
+
+.btn { display: inline-block; border: 0; cursor: pointer; background: var(--azul); color: #fff; padding: .5rem 1rem; border-radius: 7px; font-size: .93rem; text-decoration: none; }
+.btn:hover { background: var(--azul-osc); }
+.btn.sec { background: #64748b; }
+.btn.peligro { background: var(--err); }
+.btn.peq { padding: .25rem .6rem; font-size: .82rem; }
+.acciones { display: flex; gap: .4rem; }
+.acciones form { margin: 0; }
+
+.formulario { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
+.campo { display: flex; flex-direction: column; gap: .3rem; }
+.campo label { font-weight: 600; font-size: .88rem; }
+.campo input[type=text], .campo input[type=email], .campo input[type=password],
+.campo input[type=number], .campo select { padding: .5rem .6rem; border: 1px solid var(--borde); border-radius: 7px; font-size: .95rem; }
+.campo.check { flex-direction: row; align-items: center; gap: .5rem; }
+.pie-form { margin-top: 1.2rem; display: flex; gap: .6rem; }
+
+.cabecera-lista { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .6rem; margin-bottom: 1rem; }
+.etiqueta { padding: .15rem .55rem; border-radius: 99px; font-size: .78rem; font-weight: 600; background: #e3ebf3; color: var(--azul-osc); }
+.etiqueta.si { background: #e1f2e7; color: var(--ok); }
+.etiqueta.no { background: #eee; color: #666; }
+.total { color: #64748b; margin: .6rem 0 0; font-size: .9rem; }
+
+.login { max-width: 400px; margin: 4rem auto; }
+.login h1 { text-align: center; }
+.login .campo { margin-bottom: .9rem; }
+.login .btn { width: 100%; }
+.enlace-centro { text-align: center; margin-top: 1rem; font-size: .92rem; }
+
+.inicio { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.inicio a.mod { display: block; text-decoration: none; color: inherit; background: #fff; border: 1px solid var(--borde); border-radius: 10px; padding: 1.2rem; }
+.inicio a.mod:hover { border-color: var(--azul); box-shadow: 0 2px 8px rgba(31,78,121,.15); }
+.inicio a.mod h3 { margin: 0 0 .4rem; color: var(--azul); }
+.inicio a.mod p { margin: 0; color: #5d6b79; font-size: .92rem; }
+
+footer { text-align: center; color: #7a8794; font-size: .82rem; padding: 1.5rem 1rem; }
+
+@media (max-width: 640px) { .barra { padding: .6rem; } th, td { padding: .5rem; } }
