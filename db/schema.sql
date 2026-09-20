@@ -1,6 +1,7 @@
 -- Esquema de la base de datos "edificios" (PostgreSQL)
 -- Uso: psql -U postgres -d edificios -f db/schema.sql
 
+DROP TABLE IF EXISTS token_recuperacion;
 DROP TABLE IF EXISTS edificio;
 DROP TABLE IF EXISTS usuario;
 
@@ -32,3 +33,11 @@ CREATE TABLE edificio (
 );
 
 CREATE INDEX idx_edificio_ciudad ON edificio (ciudad);
+
+-- Tokens de recuperacion de clave: solo se guarda el hash SHA-256 del token. Tabla aparte para que
+-- Usuario conserve exactamente sus cuatro atributos. (La aplicacion tambien la crea si no existe.)
+CREATE TABLE IF NOT EXISTS token_recuperacion (
+    token_hash  VARCHAR(64)  PRIMARY KEY,
+    usuario_id  VARCHAR(120) NOT NULL REFERENCES usuario(id) ON DELETE CASCADE,
+    expira      TIMESTAMP    NOT NULL
+);
