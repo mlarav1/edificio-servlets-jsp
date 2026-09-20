@@ -1,0 +1,28 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%-- Tabla reutilizable de usuarios. Espera "filas" y "conAcciones". La clave nunca se muestra. --%>
+<div class="tabla-wrap">
+<table>
+  <thead><tr><th>Correo (id)</th><th>Nombre</th><th>Rol</th><c:if test="${conAcciones}"><th>Acciones</th></c:if></tr></thead>
+  <tbody>
+  <c:forEach var="u" items="${filas}">
+    <tr>
+      <td>${fn:escapeXml(u.id)}</td><td>${fn:escapeXml(u.nombre)}</td>
+      <td><span class="etiqueta">${u.rol}</span></td>
+      <c:if test="${conAcciones}">
+        <td class="acciones">
+          <a class="btn peq" href="${ctx}/UsuarioController.jsp?action=edit&id=${fn:escapeXml(u.id)}">Editar</a>
+          <form method="post" action="${ctx}/UsuarioController.jsp"
+                onsubmit="return confirm('¿Eliminar al usuario ${fn:escapeXml(u.id)}?');">
+            <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="${fn:escapeXml(u.id)}">
+            <button class="btn peq peligro" type="submit">Eliminar</button>
+          </form>
+        </td>
+      </c:if>
+    </tr>
+  </c:forEach>
+  <c:if test="${empty filas}"><tr><td colspan="4">No hay usuarios para mostrar.</td></tr></c:if>
+  </tbody>
+</table>
+</div>
+<p class="total">${fn:length(filas)} usuario(s)</p>
