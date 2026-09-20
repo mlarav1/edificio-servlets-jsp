@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%!
     // Controlador de Edificio. Recibe "action" y usa un switch para despachar cada operacion.
-    // Los metodos privados se declaran con <%! ... %> (van a la clase generada del JSP).
+    // Los metodos privados se declaran en un bloque de declaracion del JSP (van a la clase generada).
     private final EdificioService servicio = new EdificioService();
 
     /** Lee el formulario y construye la entidad (la validacion de fondo la hace el servicio). */
