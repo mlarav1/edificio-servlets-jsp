@@ -14,5 +14,5 @@ No tuve el texto original de los 12 puntos de la actividad; esta lista sigue los
 | 8 | Recuperación de clave por correo (Jakarta Mail) con hash BCrypt | Cumplido (probado con SMTP local; falta SMTP real) |
 | 9 | Repositorio público con historial de commits propio | Cumplido |
 | 10 | Word de evidencias, PDF de ficha, guion y guía de estudio | Cumplido (falta URL de la app desplegada y del video) |
-| 11 | Aplicación desplegada en Internet | Pendiente |
+| 11 | Aplicación desplegada en Internet | Cumplido: https://edificios-servlets-jsp.onrender.com (recuperación de clave real pendiente de SMTP) |
 | 12 | Video de sustentación | Pendiente (lo graba Miguel) |

@@ -61,4 +61,6 @@ mvn cargo:run        # http://localhost:8080
 
 ## Despliegue
 
+Aplicación publicada: https://edificios-servlets-jsp.onrender.com (Render, plan gratuito: se duerme tras un tiempo sin uso y la primera petición tarda ~50 s).
+
 `Dockerfile` con Tomcat 10.1. Configurar en el servicio las variables de entorno anteriores y cargar `db/schema.sql` y `db/data.sql` en la base de datos en la nube.
