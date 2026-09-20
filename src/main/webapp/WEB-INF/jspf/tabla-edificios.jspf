@@ -1,0 +1,44 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%-- Tabla reutilizable de edificios. Espera "filas" (lista) y "conAcciones" (boolean). --%>
+<div class="tabla-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th><th>Ciudad</th><th>Depto.</th><th class="num">Pisos</th><th class="num">m²</th>
+      <th class="num">Altura (m)</th><th class="num">Apts.</th><th class="num">Ofic.</th>
+      <th>Parqueadero</th><th class="num">Piscinas</th><th>Ascensor</th><th>Zona social</th>
+      <th class="num">Administración</th><c:if test="${conAcciones}"><th>Acciones</th></c:if>
+    </tr>
+  </thead>
+  <tbody>
+  <c:forEach var="e" items="${filas}">
+    <tr>
+      <td><strong>${fn:escapeXml(e.nombre)}</strong></td>
+      <td>${fn:escapeXml(e.ciudad)}</td><td>${fn:escapeXml(e.departamento)}</td>
+      <td class="num">${e.numPisos}</td>
+      <td class="num"><fmt:formatNumber value="${e.metrosCuadrados}" maxFractionDigits="2"/></td>
+      <td class="num"><fmt:formatNumber value="${e.altura}" maxFractionDigits="2"/></td>
+      <td class="num">${e.numApartamentos}</td><td class="num">${e.numOficinas}</td>
+      <td>${fn:escapeXml(e.nombreParqueadero)}</td><td class="num">${e.numPiscinas}</td>
+      <td><span class="etiqueta ${e.tieneAscensor ? 'si' : 'no'}">${e.tieneAscensor ? 'Sí' : 'No'}</span></td>
+      <td><span class="etiqueta ${e.tieneZonaSocial ? 'si' : 'no'}">${e.tieneZonaSocial ? 'Sí' : 'No'}</span></td>
+      <td class="num">$ <fmt:formatNumber value="${e.valorAdministracion}" maxFractionDigits="0"/></td>
+      <c:if test="${conAcciones}">
+        <td class="acciones">
+          <a class="btn peq" href="${ctx}/EdificioController.jsp?action=edit&id=${e.id}">Editar</a>
+          <form method="post" action="${ctx}/EdificioController.jsp"
+                onsubmit="return confirm('¿Eliminar el edificio ${fn:escapeXml(e.nombre)}?');">
+            <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="${e.id}">
+            <button class="btn peq peligro" type="submit">Eliminar</button>
+          </form>
+        </td>
+      </c:if>
+    </tr>
+  </c:forEach>
+  <c:if test="${empty filas}"><tr><td colspan="14">No hay edificios para mostrar.</td></tr></c:if>
+  </tbody>
+</table>
+</div>
+<p class="total">${fn:length(filas)} edificio(s)</p>
