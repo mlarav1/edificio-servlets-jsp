@@ -14,7 +14,7 @@ a { color: var(--azul); }
 .barra .sesion { font-size: .9rem; display: flex; gap: .8rem; align-items: center; }
 .barra .sesion a { color: var(--acento); }
 
-main { max-width: 1150px; margin: 1.5rem auto; padding: 0 1rem; }
+main { max-width: 1600px; margin: 1.5rem auto; padding: 0 1rem; }
 h1 { margin: 0 0 1rem; font-size: 1.6rem; color: var(--azul-osc); }
 .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 10px; padding: 1.2rem; margin-bottom: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
 
@@ -24,7 +24,7 @@ h1 { margin: 0 0 1rem; font-size: 1.6rem; color: var(--azul-osc); }
 
 .tabla-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: .93rem; }
-th, td { padding: .6rem .7rem; text-align: left; border-bottom: 1px solid var(--borde); white-space: nowrap; }
+th, td { padding: .55rem .6rem; text-align: left; border-bottom: 1px solid var(--borde); white-space: nowrap; }
 th { background: #eaf0f6; color: var(--azul-osc); }
 tr:hover td { background: #f8fafc; }
 td.num, th.num { text-align: right; }
