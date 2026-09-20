@@ -7,3 +7,5 @@ CLAUDE.md
 *.iml
 .vscode/
 node_modules/
+docs/herramientas/node_modules/
+docs/herramientas/package-lock.json

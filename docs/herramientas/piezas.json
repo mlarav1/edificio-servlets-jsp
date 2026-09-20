@@ -1,0 +1,10 @@
+[
+  { "archivo": "src/main/java/Domain/Model/Usuario.java", "nombre": "01-entidad-usuario", "lang": "java", "desde": 1, "hasta": 35 },
+  { "archivo": "src/main/java/Domain/Model/Edificio.java", "nombre": "02-entidad-edificio", "lang": "java", "desde": 1, "hasta": 30 },
+  { "archivo": "src/main/java/Infrastructure/Persistence/EdificioDAO.java", "nombre": "03-acceso-datos-edificio", "lang": "java", "desde": 48, "hasta": 90 },
+  { "archivo": "src/main/webapp/EdificioController.jsp", "nombre": "04-controlador-edificio", "lang": "java", "desde": 34, "hasta": 90 },
+  { "archivo": "src/main/webapp/WEB-INF/views/edificios/lista.jsp", "nombre": "05-vista-jsp-lista", "lang": "xml" },
+  { "archivo": "src/main/java/Infrastructure/Web/AuthFilter.java", "nombre": "06-verificacion-sesion", "lang": "java", "desde": 17, "hasta": 58 },
+  { "archivo": "src/main/java/Infrastructure/Persistence/EdificioDAO.java", "nombre": "07-reporte-consulta", "lang": "java", "desde": 108, "hasta": 145 },
+  { "archivo": "src/main/java/Business/Services/AuthService.java", "nombre": "08-recuperacion-clave", "lang": "java", "desde": 10, "hasta": 60 }
+]
